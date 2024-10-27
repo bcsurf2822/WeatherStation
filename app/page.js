@@ -8,8 +8,8 @@ export default function Home() {
   useEffect(() => {
     const fetchLocation = async () => {
       try {
-        const data = await getWeather("Marmora");
-        setLocation(data);
+        const data = await getWeather("marmora");
+        console.log(data)
       } catch (error) {
         console.error("Error fetching location:", error);
       }
