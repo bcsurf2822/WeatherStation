@@ -6,27 +6,39 @@ const weatherURL = process.env.NEXT_PUBLIC_WEATHER_URL;
 const openWeatherAPI = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
 export const fetchWeatherData = createAsyncThunk(
-  "weather/fetchWeather",
+  "weather/fetchWeatherData",
   async (search) => {
-    console.log("FETCH CALLED")
-    const response = await axios.get(geocodingURL, {
+    const geocodeResponse = await axios.get(geocodingURL, {
       params: {
         q: `${search},US`,
         appid: openWeatherAPI,
       },
     });
-    const data = response.data;
-    console.log("Slice Data", data);
-    if (data.length === 0) throw new Error("City not found");
-    const { lat, lon } = data[0];
-    return { lat, lon };
+
+    const geocodeData = geocodeResponse.data;
+    if (geocodeData.length === 0) throw new Error("City not found");
+
+    const { lat, lon } = geocodeData[0];
+    const weatherResponse = await axios.get(weatherURL, {
+      params: {
+        lat: lat,
+        lon: lon,
+        appid: openWeatherAPI,
+      },
+    });
+
+    const localWeather = weatherResponse.data;
+    console.log("WeatherSliceData", localWeather);
+
+    return {
+      weather: localWeather
+    };
   }
 );
 
 export const weatherSlice = createSlice({
   name: "weather",
   initialState: {
-    cities: [],
     weather: {},
     status: "idle",
     error: null,
