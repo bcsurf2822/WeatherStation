@@ -3,24 +3,29 @@ import { IconSunHigh, IconTemperaturePlus } from "@tabler/icons-react";
 import ReactGoogleAutocomplete from "react-google-autocomplete";
 import styles from "./components.module.css";
 import { getCityCoordinates } from "../services/openWeatherAPI";
+import { useDispatch } from "react-redux";
+import { fetchWeatherData } from "../store/slices/weatherSlice";
 
 export default function SearchBar() {
+  const dispatch = useDispatch();
   const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
-  const [search, setSearch] = useState("")
-
+  const [search, setSearch] = useState("");
 
   const handlePlaceSelected = (place) => {
-    console.log(place)
-    const desCity = place?.address_components?.[0]?.short_name?.replace(/\s+/g, "-");
-    const state = place?.address_components?.[2]?.short_name
-    const data = desCity.toLowerCase() +","+state.toLowerCase()
-    console.log("new", data)
-    getCityCoordinates(data)
+    console.log(place);
+    const desCity = place?.address_components?.[0]?.short_name?.replace(
+      /\s+/g,
+      "-"
+    );
+    const state = place?.address_components?.[2]?.short_name;
+    const data = desCity.toLowerCase() + "," + state.toLowerCase();
+    console.log("GoogleResult", data);
+    dispatch(fetchWeatherData(data));
   };
 
   const handleSearch = (e) => {
-    setSearch(e.target.value)
-  }
+    setSearch(e.target.value);
+  };
 
   return (
     <div className="container">
@@ -33,7 +38,7 @@ export default function SearchBar() {
           </li>
         </ul>
         <ReactGoogleAutocomplete
-        className={styles.search}
+          className={styles.search}
           apiKey={googleMapAPI}
           onPlaceSelected={handlePlaceSelected}
         />
