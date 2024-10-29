@@ -1,4 +1,4 @@
-import axios from "axios";
+
 
 
 const geocodingURL = process.env.NEXT_PUBLIC_GEOCODING_URL;
@@ -7,15 +7,16 @@ const weatherURL = process.env.NEXT_PUBLIC_WEATHER_URL;
 
 const openWeatherAPI = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 
-export const getCity = async (query) => {
+export const getCityCoordinates = async (search) => {
   try {
-    const response = await axios.get(`${geocodingURL}`, {
+    const response = await fetch(`${geocodingURL}`, {
       params: {
-        q: `${query},US`,
+        q: `${search},US`,
         limit: 5,
         appid: openWeatherAPI,
       },
     });
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.error("Error fetching city data:", error);

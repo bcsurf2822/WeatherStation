@@ -1,16 +1,26 @@
 import { useState, useEffect } from "react";
 import { IconSunHigh, IconTemperaturePlus } from "@tabler/icons-react";
-
-
 import ReactGoogleAutocomplete from "react-google-autocomplete";
-const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
+import styles from "./components.module.css";
+import { getCityCoordinates } from "../services/openWeatherAPI";
 
 export default function SearchBar() {
+  const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
+  const [search, setSearch] = useState("")
 
 
   const handlePlaceSelected = (place) => {
-    console.log(place);
+    console.log(place)
+    const desCity = place?.address_components?.[0]?.short_name?.replace(/\s+/g, "-");
+    const state = place?.address_components?.[2]?.short_name
+    const data = desCity.toLowerCase() +","+state.toLowerCase()
+    console.log("new", data)
+    getCityCoordinates(data)
   };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value)
+  }
 
   return (
     <div className="container">
@@ -23,10 +33,11 @@ export default function SearchBar() {
           </li>
         </ul>
         <ReactGoogleAutocomplete
+        className={styles.search}
           apiKey={googleMapAPI}
           onPlaceSelected={handlePlaceSelected}
         />
-        ;
+
         <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
           <input
             type="search"
