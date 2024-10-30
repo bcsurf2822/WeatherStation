@@ -5,15 +5,15 @@
 }
 
 .searchContainer {
-  border: 1px solid red;
-  background-color: blue;
+  border: 2px solid red;
+  background-color: #235789;
   grid-column: 1 / -1;
   grid-row: 1 /3;
 }
 
 .sideNav {
   border: 2px solid red;
-  background-color: blue;
+  background-color: #235789;
   grid-column: 1 / 3;
   grid-row: 3 / -1;
 }

@@ -1,9 +1,8 @@
 .search {
-  border: 2px solid black;
-  background-color: black;
+  border: 2px solid #e0e0ce;
+  background-color: #474747;
   color: whitesmoke;
   border-radius: 5px;
-  height: 80%;
 }
 
 .conditionsContainer {

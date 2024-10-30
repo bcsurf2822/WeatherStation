@@ -8,8 +8,6 @@ import { setLocation, fetchWeatherData } from "../store/slices/weatherSlice";
 export default function SearchBar() {
   const dispatch = useDispatch();
   const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
-  const [search, setSearch] = useState("");
-
 
   const handleAutoselect = (place) => {
     const city = place?.address_components?.[0]?.short_name?.replace(
@@ -24,10 +22,6 @@ export default function SearchBar() {
       .trim();
     dispatch(setLocation(locationInfo));
     dispatch(fetchWeatherData(data));
-  };
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
   };
 
   return (
@@ -45,20 +39,6 @@ export default function SearchBar() {
           apiKey={googleMapAPI}
           onPlaceSelected={handleAutoselect}
         />
-
-        <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input
-            type="search"
-            className="form-control form-control-dark text-bg-dark"
-            placeholder="Search..."
-            aria-label="Search"
-          />
-        </form>
-        <div className="text-end">
-          <button type="submit" className="btn btn-primary">
-            SEARCH
-          </button>
-        </div>
       </div>
     </div>
   );
