@@ -1,7 +1,7 @@
 "use client"
-import { useEffect, useState } from "react";
+
 import styles from "./page.module.css";
-import { getWeather } from "./services/openWeatherAPI";
+
 import SearchBar from "./components/SearchBar";
 
 export default function Home() {
@@ -11,8 +11,9 @@ export default function Home() {
       <div className={styles.searchContainer}>
         <SearchBar />
       </div>
-        
-  
+      <div className="sideNav"></div>
+        <div className="weatherContainer"></div>
+        <div className="footer"></div>
     </div>
   );
 }
