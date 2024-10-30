@@ -27,11 +27,15 @@ export const fetchWeatherData = createAsyncThunk(
       },
     });
 
-    const localWeather = weatherResponse.data;
-    console.log("WeatherSliceData", localWeather);
+    const weatherData = weatherResponse.data;
+
+    const localForecast = [];
+    for (let i = 4; i < weatherData.list.length; i += 8) {
+      localForecast.push(weatherData.list[i]);
+    }
 
     return {
-      weather: localWeather
+      weather: localForecast,
     };
   }
 );
@@ -39,11 +43,16 @@ export const fetchWeatherData = createAsyncThunk(
 export const weatherSlice = createSlice({
   name: "weather",
   initialState: {
-    weather: {},
+    location: "",
+    weather: [],
     status: "idle",
     error: null,
   },
-  reducers: {},
+  reducers: {
+    setLocation: (state, action) => {
+      state.location = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchWeatherData.pending, (state) => {
@@ -51,7 +60,7 @@ export const weatherSlice = createSlice({
       })
       .addCase(fetchWeatherData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.weather = action.payload;
+        state.weather = action.payload.weather;
       })
       .addCase(fetchWeatherData.rejected, (state, action) => {
         state.status = "failed";
@@ -60,4 +69,5 @@ export const weatherSlice = createSlice({
   },
 });
 
+export const { setLocation } = weatherSlice.actions;
 export default weatherSlice.reducer;

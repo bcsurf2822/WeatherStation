@@ -6,19 +6,6 @@ import SearchBar from "./components/SearchBar";
 
 export default function Home() {
 
-  // useEffect(() => {
-  //   const fetchLocation = async () => {
-  //     try {
-  //       const data = await getWeather("marmora");
-  //       console.log(data)
-  //     } catch (error) {
-  //       console.error("Error fetching location:", error);
-  //     }
-  //   };
-
-  //   fetchLocation();
-  // }, []);
-
   return (
     <div className={styles.page}>
       <div className={styles.searchContainer}>
