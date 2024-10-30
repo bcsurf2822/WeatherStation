@@ -17,6 +17,7 @@
     "@tabler/icons-react": "2.30.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "classnames": "^2.5.1",
     "next": "15.0.1",
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",

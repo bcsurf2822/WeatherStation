@@ -5,11 +5,44 @@
   border-radius: 5px;
 }
 
+.weatherCard {
+  margin-bottom: 20px;
+}
+
+.card {
+  width: 100%;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.cardBody {
+  padding: 10px;
+}
+
+.cardTitle {
+  text-align: center;
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
 .conditionsContainer {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .weatherData {
-  display: block;
+  text-align: center;
+  flex: 1;
+}
+
+.weatherData p {
+  margin: 5px 0;
+}
+
+.metric {
+  font-weight: 600;
 }
