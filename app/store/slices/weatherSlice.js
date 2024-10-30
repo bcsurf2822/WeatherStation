@@ -23,6 +23,7 @@ export const fetchWeatherData = createAsyncThunk(
       params: {
         lat: lat,
         lon: lon,
+        units: "imperial",
         appid: openWeatherAPI,
       },
     });
@@ -31,7 +32,7 @@ export const fetchWeatherData = createAsyncThunk(
 
     const localForecast = [];
     for (let i = 4; i < weatherData.list.length; i += 8) {
-      localForecast.push(weatherData.list[i]);
+      localForecast.push(weatherData.list[i].main);
     }
 
     return {

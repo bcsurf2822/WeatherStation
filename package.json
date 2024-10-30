@@ -17,7 +17,8 @@
     "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^17.0.0 || ^18.0.0",
     "react-google-autocomplete": "^2.7.3",
-    "react-redux": "^9.1.2"
+    "react-redux": "^9.1.2",
+    "react-sparklines": "^1.7.0"
   },
   "peerDependencies": {
     "react": "^17.0.0 || ^18.0.0",

@@ -5,3 +5,12 @@
   border-radius: 5px;
   height: 80%;
 }
+
+.conditionsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.weatherData {
+  display: block;
+}
