@@ -14,14 +14,9 @@ export default function Home() {
       <div className={styles.sideNav}></div>
       <div className="weatherContainer">
         <div className="container text-center">
-          <div className="row">
-            <div className="col">Column</div>
-            <div className="col">Column</div>
-          </div>
-          <div className="row">
-            <div className="col">Column</div>
-            <div className="col">Column</div>
-          </div>
+        <div className="row">
+          <WeatherContainer /> 
+        </div>
         </div>
       </div>
       <div className="footer"></div>

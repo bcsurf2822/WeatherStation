@@ -44,14 +44,14 @@ export const fetchWeatherData = createAsyncThunk(
 export const weatherSlice = createSlice({
   name: "weather",
   initialState: {
-    location: "",
+    location: [],
     weather: [],
     status: "idle",
     error: null,
   },
   reducers: {
     setLocation: (state, action) => {
-      state.location = action.payload;
+      state.location.push(action.payload); 
     },
   },
   extraReducers: (builder) => {
@@ -61,7 +61,7 @@ export const weatherSlice = createSlice({
       })
       .addCase(fetchWeatherData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.weather = action.payload.weather;
+        state.weather.push(action.payload.weather);
       })
       .addCase(fetchWeatherData.rejected, (state, action) => {
         state.status = "failed";
