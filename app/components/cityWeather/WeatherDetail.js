@@ -2,7 +2,7 @@ import React from "react";
 import { LineChart } from "@mui/x-charts/LineChart";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
-import styles from "../components.module.css";
+import styles from "./card.module.css";
 import { getDay } from "@/app/utils/getDay";
 
 export default function WeatherDetail({ data }) {

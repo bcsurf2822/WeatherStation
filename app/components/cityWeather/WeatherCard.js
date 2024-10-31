@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "../components.module.css";
+import styles from "./card.module.css";
 import WeatherDetail from "./WeatherDetail";
 
 export default function WeatherCard({ location, weather }) {
