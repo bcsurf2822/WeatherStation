@@ -11,18 +11,23 @@ export default function WeatherDetail({ data }) {
   return (
     <Stack className={styles.sparklinesContainer} direction="column" sx={{ width: "100%" }}>
       <h5 className={styles.forecastTitle}>Forecast</h5>
-      <Box sx={{ flexGrow: 1, marginTop: 2 }}>
+      <Box className={styles.chart} sx={{ flexGrow: 1, marginTop: .5 }}>
         <LineChart
-          xAxis={[{ data: Array.from({ length: data.length }, (_, i) => i + 1) }]} // Sets x-axis labels to 1, 2, 3, etc.
+          xAxis={[{ data: data.map((_, index) => index),
+            valueFormatter: (index) => day[index], 
+            tickInterval: 1, 
+                 scaleType: "point"
+   
+          }]} 
           series={[
             {
               data: data,
-              area: true,          // Fills the area under the line
-              baseline: "min",     // Baseline for the area fill is set to minimum value
+              area: true,       
+              baseline: "min",     
             },
           ]}
-          width={500}              // Adjust as needed
-          height={200}             // Adjust as needed
+          width={500}              
+          height={200}          
           showTooltip
         />
       </Box>
