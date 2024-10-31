@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { IconSunHigh, IconTemperaturePlus } from "@tabler/icons-react";
 import ReactGoogleAutocomplete from "react-google-autocomplete";
 import styles from "./components.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLocation, fetchWeatherData } from "../store/slices/weatherSlice";
 
 export default function SearchBar() {
