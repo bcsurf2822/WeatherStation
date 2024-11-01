@@ -8,12 +8,6 @@ export default function AutoComplete() {
   const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
   const dispatch = useDispatch();
 
-  // const { isLoaded } = useJsApiLoader({
-  //   id: "google-map-script",
-  //   googleMapsApiKey: googleMapAPI,
-  //   libraries: ["places"],
-  // });
-
   const { ref } = usePlacesWidget({
     apiKey: googleMapAPI,
     onPlaceSelected: (place) => {
@@ -29,11 +23,6 @@ export default function AutoComplete() {
       const state = place?.address_components?.[2]?.short_name;
       const data = city.toLowerCase() + "," + state.toLowerCase();
 
-      // const locationInfo = place?.formatted_address
-      //   .replace(/,\s*|\s*USA\b|\b\d{5}(?:-\d{4})?\b/g, " ")
-      //   .replace(/\s{2,}/g, " ")
-      //   .trim();
-      // dispatch(setLocation(locationInfo));
       dispatch(fetchWeatherData(data));
       if (ref.current) {
         ref.current.value = "";

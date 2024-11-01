@@ -12,7 +12,8 @@ const quicksand = Quicksand({
 });
 
 export default function Home() {
-  const location = useSelector((state) => state.weather.city);
+  const city = useSelector((state) => state.weather.city);
+  const state = useSelector((state) => state.weather.state);
   const weatherData = useSelector((state) => state.weather.weather);
 
   return (
@@ -27,6 +28,8 @@ export default function Home() {
             key={index}
             location={location[index]}
             weather={weather}
+            city={city[index]}
+            state={state[index]}
           />
         ))}
       </div>
