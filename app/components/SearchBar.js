@@ -1,28 +1,8 @@
-import { useState, useEffect } from "react";
 import { IconSunHigh, IconTemperaturePlus } from "@tabler/icons-react";
-import ReactGoogleAutocomplete from "react-google-autocomplete";
-import styles from "./components.module.css";
-import { useDispatch } from "react-redux";
-import { setLocation, fetchWeatherData } from "../store/slices/weatherSlice";
+import AutoComplete from "./Autocomplete";
 
 export default function SearchBar() {
-  const dispatch = useDispatch();
-  const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
 
-  const handleAutoselect = (place) => {
-    const city = place?.address_components?.[0]?.short_name?.replace(
-      /\s+/g,
-      "-"
-    );
-    const state = place?.address_components?.[2]?.short_name;
-    const data = city.toLowerCase() + "," + state.toLowerCase();
-    const locationInfo = place?.formatted_address
-      .replace(/,\s*|\s*USA\b|\b\d{5}(?:-\d{4})?\b/g, " ")
-      .replace(/\s{2,}/g, " ")
-      .trim();
-    dispatch(setLocation(locationInfo));
-    dispatch(fetchWeatherData(data));
-  };
 
   return (
     <div className="container">
@@ -34,11 +14,7 @@ export default function SearchBar() {
             <IconTemperaturePlus />
           </li>
         </ul>
-        <ReactGoogleAutocomplete
-          className={styles.search}
-          apiKey={googleMapAPI}
-          onPlaceSelected={handleAutoselect}
-        />
+        <AutoComplete />
       </div>
     </div>
   );

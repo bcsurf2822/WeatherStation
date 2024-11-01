@@ -14,7 +14,7 @@ export default function WeatherCard({ location, weather }) {
         <div className={styles.cardBody}>
           <h3 className={styles.cardTitle}>{location}</h3>
 
-          <div className={styles.conditionsContainer}>
+          {/* <div className={styles.conditionsContainer}>
             <div className={styles.weatherData}>
               <p className={styles.metric}>Temperature</p>
               <p>{Math.round(temp)}°</p>
@@ -27,7 +27,7 @@ export default function WeatherCard({ location, weather }) {
               <p className={styles.metric}>Pressure</p>
               <p>{pressure} hPa</p>
             </div>
-          </div>
+          </div> */}
           <WeatherDetail
             data={metricData}
             selectedMetric={selectedMetric}

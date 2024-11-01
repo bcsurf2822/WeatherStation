@@ -21,7 +21,7 @@ export default function Home() {
       <div className={styles.searchContainer}>
         <SearchBar />
       </div>
-      {/* <div className={styles.sideNav}></div> */}
+      <div className={styles.sideNav}></div>
       <div className={styles.mainContent}>
         {weatherData.map((weather, index) => (
           <WeatherCard

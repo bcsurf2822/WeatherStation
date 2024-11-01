@@ -56,7 +56,7 @@ export default function WeatherDetail({
               baseline: "min",
             },
           ]}
-          showTooltip
+          showtooltip="true"
         />
       </Box>
     </Stack>
