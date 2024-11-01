@@ -5,7 +5,7 @@ import {  fetchWeatherData } from "../store/slices/weatherSlice";
 
 
 export default function AutoComplete() {
-  const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
+  const googleMapAPI = process.env.GOOGLE_MAP;
   const dispatch = useDispatch();
 
   const { ref } = usePlacesWidget({

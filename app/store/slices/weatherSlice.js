@@ -1,9 +1,9 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const geocodingURL = process.env.NEXT_PUBLIC_GEOCODING_URL;
-const weatherURL = process.env.NEXT_PUBLIC_WEATHER_URL;
-const openWeatherAPI = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+const geocodingURL = process.env.GEOCODING_URL;
+const weatherURL = process.env.WEATHER_URL;
+const openWeatherAPI = process.env.OPENWEATHER_API_KEY;
 
 export const fetchWeatherData = createAsyncThunk(
   "weather/fetchWeatherData",
