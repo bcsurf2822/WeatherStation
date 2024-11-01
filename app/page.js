@@ -1,5 +1,4 @@
 "use client";
-
 import styles from "./page.module.css";
 import { Quicksand } from "next/font/google";
 import SearchBar from "./components/SearchBar";

@@ -41,5 +41,5 @@ export default function AutoComplete() {
     },
   });
 
-  return <input ref={ref} type="text" placeholder="Search for a city" />;
+  return <input ref={ref} type="text" placeholder="City.." />;
 }
