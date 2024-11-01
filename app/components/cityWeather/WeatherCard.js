@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./card.module.css";
 import WeatherDetail from "./WeatherDetail";
+import { useSelector } from "react-redux";
 
 export default function WeatherCard({ location, weather }) {
   const [selectedMetric, setSelectedMetric] = useState("temp");

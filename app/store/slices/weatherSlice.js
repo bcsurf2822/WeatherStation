@@ -16,17 +16,21 @@ export const fetchWeatherData = createAsyncThunk(
         },
       });
 
-
       const geocodeData = geocodeResponse.data;
       if (geocodeData.length === 0) {
         throw new Error("City not found");
-
       }
 
+      console.log("GEO", geocodeData[0]);
+
+      const state = geocodeData[0].state;
+      const city = geocodeData[0].name;
+      console.log(state);
+
       const { lat, lon } = geocodeData[0];
-      console.log(lat)
-      console.log(lon)
-   
+      console.log(lat);
+      console.log(lon);
+
       const weatherResponse = await axios.get(weatherURL, {
         params: {
           lat: lat,
@@ -36,9 +40,6 @@ export const fetchWeatherData = createAsyncThunk(
         },
       });
 
-
-      console.log("Weather Response:", weatherResponse.data);
-
       const weatherData = weatherResponse.data;
 
       const localForecast = [];
@@ -46,10 +47,9 @@ export const fetchWeatherData = createAsyncThunk(
         localForecast.push(weatherData.list[i].main);
       }
 
-
-      console.log("Local Forecast Data:", localForecast);
-
       return {
+        state: state,
+        city: city,
         weather: localForecast,
       };
     } catch (error) {
@@ -62,15 +62,16 @@ export const fetchWeatherData = createAsyncThunk(
 export const weatherSlice = createSlice({
   name: "weather",
   initialState: {
-    location: [],
+    state: [],
+    city: [],
     weather: [],
     status: "idle",
     error: null,
   },
   reducers: {
-    setLocation: (state, action) => {
-      state.location.push(action.payload);
-    },
+    // setLocation: (state, action) => {
+    //   state.location.push(action.payload);
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -80,6 +81,8 @@ export const weatherSlice = createSlice({
       .addCase(fetchWeatherData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.weather.push(action.payload.weather);
+        state.city.push(action.payload.city);
+        state.state.push(action.payload.state);
       })
       .addCase(fetchWeatherData.rejected, (state, action) => {
         state.status = "failed";

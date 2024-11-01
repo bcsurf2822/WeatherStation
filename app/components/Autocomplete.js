@@ -1,7 +1,7 @@
 import React from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useDispatch } from "react-redux";
-import { setLocation, fetchWeatherData } from "../store/slices/weatherSlice";
+import {  fetchWeatherData } from "../store/slices/weatherSlice";
 import { useJsApiLoader } from "@react-google-maps/api";
 
 export default function AutoComplete() {
@@ -29,11 +29,11 @@ export default function AutoComplete() {
       const state = place?.address_components?.[2]?.short_name;
       const data = city.toLowerCase() + "," + state.toLowerCase();
 
-      const locationInfo = place?.formatted_address
-        .replace(/,\s*|\s*USA\b|\b\d{5}(?:-\d{4})?\b/g, " ")
-        .replace(/\s{2,}/g, " ")
-        .trim();
-      dispatch(setLocation(locationInfo));
+      // const locationInfo = place?.formatted_address
+      //   .replace(/,\s*|\s*USA\b|\b\d{5}(?:-\d{4})?\b/g, " ")
+      //   .replace(/\s{2,}/g, " ")
+      //   .trim();
+      // dispatch(setLocation(locationInfo));
       dispatch(fetchWeatherData(data));
       if (ref.current) {
         ref.current.value = "";
