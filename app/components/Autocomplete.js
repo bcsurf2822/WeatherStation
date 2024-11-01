@@ -39,6 +39,9 @@ export default function AutoComplete() {
         ref.current.value = "";
       }
     },
+    options: {
+      componentRestrictions: { country: "us" },
+    },
   });
 
   return <input ref={ref} type="text" placeholder="City.." />;

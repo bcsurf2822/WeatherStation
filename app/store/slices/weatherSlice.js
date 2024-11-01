@@ -8,36 +8,62 @@ const openWeatherAPI = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
 export const fetchWeatherData = createAsyncThunk(
   "weather/fetchWeatherData",
   async (search) => {
-    const geocodeResponse = await axios.get(geocodingURL, {
-      params: {
-        q: `${search},US`,
-        appid: openWeatherAPI,
-      },
-    });
+    try {
+      // Log to check if the API key and URLs are correctly retrieved
+      console.log("Geocoding URL:", geocodingURL);
+      console.log("Weather URL:", weatherURL);
+      console.log("OpenWeather API Key:", openWeatherAPI);
+      console.log("Search Query:", search);
 
-    const geocodeData = geocodeResponse.data;
-    if (geocodeData.length === 0) throw new Error("City not found");
+      // Geocoding request
+      const geocodeResponse = await axios.get(geocodingURL, {
+        params: {
+          q: `${search},US`,
+          appid: openWeatherAPI,
+        },
+      });
 
-    const { lat, lon } = geocodeData[0];
-    const weatherResponse = await axios.get(weatherURL, {
-      params: {
-        lat: lat,
-        lon: lon,
-        units: "imperial",
-        appid: openWeatherAPI,
-      },
-    });
+      // Log the geocoding response
+      console.log("Geocode Response:", geocodeResponse.data);
 
-    const weatherData = weatherResponse.data;
+      const geocodeData = geocodeResponse.data;
+      if (geocodeData.length === 0) {
+        throw new Error("City not found");
+      }
 
-    const localForecast = [];
-    for (let i = 4; i < weatherData.list.length; i += 8) {
-      localForecast.push(weatherData.list[i].main);
+      const { lat, lon } = geocodeData[0];
+      
+      // Weather request
+      const weatherResponse = await axios.get(weatherURL, {
+        params: {
+          lat: lat,
+          lon: lon,
+          units: "imperial",
+          appid: openWeatherAPI,
+        },
+      });
+
+      // Log the weather response
+      console.log("Weather Response:", weatherResponse.data);
+
+      const weatherData = weatherResponse.data;
+
+      // Create a local forecast based on the returned data
+      const localForecast = [];
+      for (let i = 4; i < weatherData.list.length; i += 8) {
+        localForecast.push(weatherData.list[i].main);
+      }
+
+      // Log the final local forecast data
+      console.log("Local Forecast Data:", localForecast);
+
+      return {
+        weather: localForecast,
+      };
+    } catch (error) {
+      console.error("Error in fetchWeatherData:", error);
+      throw error;
     }
-
-    return {
-      weather: localForecast,
-    };
   }
 );
 
