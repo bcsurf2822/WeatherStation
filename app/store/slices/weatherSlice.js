@@ -28,11 +28,15 @@ export const fetchWeatherData = createAsyncThunk(
 
       const geocodeData = geocodeResponse.data;
       if (geocodeData.length === 0) {
+        console.log("CITY NOT FOUND")
         throw new Error("City not found");
+
       }
+      console.log("GEO DATA", geocodeData)
 
       const { lat, lon } = geocodeData[0];
-      
+      console.log(lat)
+      console.log(lon)
       // Weather request
       const weatherResponse = await axios.get(weatherURL, {
         params: {
