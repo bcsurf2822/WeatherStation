@@ -41,7 +41,6 @@ export const fetchWeatherData = createAsyncThunk(
 
       const weatherData = weatherResponse.data;
 
-
       const localForecast = [];
       for (let i = 4; i < weatherData.list.length; i += 8) {
         localForecast.push(weatherData.list[i].main);
@@ -54,7 +53,7 @@ export const fetchWeatherData = createAsyncThunk(
         weather: localForecast,
       };
     } catch (error) {
-      console.error("Error in fetchWeatherData:", error);
+      console.error("Error in fetch WeatherData:", error);
       throw error;
     }
   }
