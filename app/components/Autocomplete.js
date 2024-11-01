@@ -2,7 +2,7 @@ import React from "react";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useDispatch } from "react-redux";
 import {  fetchWeatherData } from "../store/slices/weatherSlice";
-import { useJsApiLoader } from "@react-google-maps/api";
+
 
 export default function AutoComplete() {
   const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
