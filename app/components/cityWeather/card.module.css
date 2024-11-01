@@ -11,8 +11,13 @@
   padding: 15px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: rgb(64, 79, 92);
+  background: linear-gradient(
+    180deg,
+    rgba(64, 79, 92, 1) 0%,
+    rgba(35, 87, 137, 1) 77%
+  );
+  color: whitesmoke;
 }
 
 .cardBody {

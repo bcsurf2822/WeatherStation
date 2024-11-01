@@ -51,7 +51,7 @@ export const weatherSlice = createSlice({
   },
   reducers: {
     setLocation: (state, action) => {
-      state.location.push(action.payload); 
+      state.location.push(action.payload);
     },
   },
   extraReducers: (builder) => {

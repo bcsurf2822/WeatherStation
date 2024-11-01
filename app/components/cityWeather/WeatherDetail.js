@@ -18,7 +18,6 @@ export default function WeatherDetail({
       direction="column"
       sx={{ width: "97%" }}
     >
-      <h5 className={styles.forecastTitle}>Forecast</h5>
       <div className={styles.switchContainer}>
         <button
           className={selectedMetric === "temp" ? styles.activeButton : ""}
@@ -40,7 +39,8 @@ export default function WeatherDetail({
         </button>
       </div>
       <Box className={styles.chart} sx={{ flexGrow: 1, marginTop: 0.5 }}>
-        <LineChart  sx={{ width: "97%" , height: "100%"}}
+        <LineChart
+          sx={{ width: "97%", height: "100%" }}
           xAxis={[
             {
               data: data.map((_, index) => index),
@@ -54,6 +54,7 @@ export default function WeatherDetail({
               data: data,
               area: true,
               baseline: "min",
+              color: "#235789",
             },
           ]}
           showtooltip="true"
