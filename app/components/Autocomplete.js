@@ -7,13 +7,13 @@ import {  fetchWeatherData } from "../store/slices/weatherSlice";
 
 
 export default function AutoComplete() {
-  const googleMapAPI = process.env.GOOGLE_MAP_API;
+  // const googleMapAPI = process.env.GOOGLE_MAP_API;
   const dispatch = useDispatch();
 
   
 
   const { ref } = usePlacesWidget({
-    apiKey: googleMapAPI,
+    apiKey: process.env.GOOGLE_MAP_API,
     onPlaceSelected: (place) => {
       if (!place || !place.address_components) {
         console.error("No data for that location");
