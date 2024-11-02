@@ -9,47 +9,49 @@ export const fetchWeatherData = createAsyncThunk(
   "weather/fetchWeatherData",
   async (search) => {
     try {
-      const geocodeResponse = await axios.get(geocodingURL, {
+      const response = await axios.get('api/weather', {
         params: {
-          q: `${search},US`,
-          appid: openWeatherAPI,
+          search,
         },
       });
 
-      const geocodeData = geocodeResponse.data;
-      if (geocodeData.length === 0) {
-        throw new Error("City not found");
-      }
+      const weatherData = response.data
 
-      console.log("GEO", geocodeData[0]);
+      // const geocodeData = geocodeResponse.data;
+      // if (geocodeData.length === 0) {
+      //   throw new Error("City not found");
+      // }
 
-      const state = geocodeData[0].state;
-      const city = geocodeData[0].name;
-      console.log(state);
+      // console.log("GEO", geocodeData[0]);
 
-      const { lat, lon } = geocodeData[0];
-      console.log(lat);
-      console.log(lon);
+      // const state = geocodeData[0].state;
+      // const city = geocodeData[0].name;
+      // console.log(state);
 
-      const weatherResponse = await axios.get(weatherURL, {
-        params: {
-          lat: lat,
-          lon: lon,
-          units: "imperial",
-          appid: openWeatherAPI,
-        },
-      });
+      // const { lat, lon } = geocodeData[0];
+      // console.log(lat);
+      // console.log(lon);
 
-      const weatherData = weatherResponse.data;
+      // const weatherResponse = await axios.get(weatherURL, {
+      //   params: {
+      //     lat: lat,
+      //     lon: lon,
+      //     units: "imperial",
+      //     appid: openWeatherAPI,
+      //   },
+      // });
+
+      // const weatherData = weatherResponse.data;
 
       const localForecast = [];
       for (let i = 4; i < weatherData.list.length; i += 8) {
         localForecast.push(weatherData.list[i].main);
       }
+      console.log("Local", localForecast)
 
       return {
-        state: state,
-        city: city,
+        // state: state,
+        // city: city,
         weather: localForecast,
       };
     } catch (error) {
@@ -58,6 +60,60 @@ export const fetchWeatherData = createAsyncThunk(
     }
   }
 );
+
+// export const fetchWeatherData = createAsyncThunk(
+//   "weather/fetchWeatherData",
+//   async (search) => {
+//     try {
+//       const geocodeResponse = await axios.get(geocodingURL, {
+//         params: {
+//           q: `${search},US`,
+//           appid: openWeatherAPI,
+//         },
+//       });
+
+//       const geocodeData = geocodeResponse.data;
+//       if (geocodeData.length === 0) {
+//         throw new Error("City not found");
+//       }
+
+//       console.log("GEO", geocodeData[0]);
+
+//       const state = geocodeData[0].state;
+//       const city = geocodeData[0].name;
+//       console.log(state);
+
+//       const { lat, lon } = geocodeData[0];
+//       console.log(lat);
+//       console.log(lon);
+
+//       const weatherResponse = await axios.get(weatherURL, {
+//         params: {
+//           lat: lat,
+//           lon: lon,
+//           units: "imperial",
+//           appid: openWeatherAPI,
+//         },
+//       });
+
+//       const weatherData = weatherResponse.data;
+
+//       const localForecast = [];
+//       for (let i = 4; i < weatherData.list.length; i += 8) {
+//         localForecast.push(weatherData.list[i].main);
+//       }
+
+//       return {
+//         state: state,
+//         city: city,
+//         weather: localForecast,
+//       };
+//     } catch (error) {
+//       console.error("Error in fetch WeatherData:", error);
+//       throw error;
+//     }
+//   }
+// );
 
 export const weatherSlice = createSlice({
   name: "weather",
