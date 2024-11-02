@@ -1,65 +1,39 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const geocodingURL = process.env.NEXT_PUBLIC_GEOCODING_URL;
-const weatherURL = process.env.NEXT_PUBLIC_WEATHER_URL;
-const openWeatherAPI = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+// const geocodingURL = process.env.NEXT_PUBLIC_GEOCODING_URL;
+// const weatherURL = process.env.NEXT_PUBLIC_WEATHER_URL;
+// const openWeatherAPI = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+
 
 export const fetchWeatherData = createAsyncThunk(
-  "weather/fetchWeatherData",
+  'weather/fetchWeatherData',
   async (search) => {
+    console.log(search)
     try {
-      const response = await axios.get('api/weather', {
-        params: {
-          search,
-        },
+      // Make the request to your own backend proxy endpoint
+      const response = await fetch.get(`/api/fetchWeather`, {
+        params: { search },
       });
 
-      const weatherData = response.data
-
-      // const geocodeData = geocodeResponse.data;
-      // if (geocodeData.length === 0) {
-      //   throw new Error("City not found");
-      // }
-
-      // console.log("GEO", geocodeData[0]);
-
-      // const state = geocodeData[0].state;
-      // const city = geocodeData[0].name;
-      // console.log(state);
-
-      // const { lat, lon } = geocodeData[0];
-      // console.log(lat);
-      // console.log(lon);
-
-      // const weatherResponse = await axios.get(weatherURL, {
-      //   params: {
-      //     lat: lat,
-      //     lon: lon,
-      //     units: "imperial",
-      //     appid: openWeatherAPI,
-      //   },
-      // });
-
-      // const weatherData = weatherResponse.data;
+      // Extract the relevant data for the Redux store
+      const weatherData = response.data;
 
       const localForecast = [];
       for (let i = 4; i < weatherData.list.length; i += 8) {
         localForecast.push(weatherData.list[i].main);
       }
-      console.log("Local", localForecast)
 
       return {
-        // state: state,
-        // city: city,
         weather: localForecast,
       };
     } catch (error) {
-      console.error("Error in fetch WeatherData:", error);
-      throw error;
+      throw new Error('Failed to fetch weather data');
     }
   }
 );
+
+
 
 // export const fetchWeatherData = createAsyncThunk(
 //   "weather/fetchWeatherData",

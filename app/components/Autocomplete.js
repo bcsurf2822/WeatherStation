@@ -1,13 +1,14 @@
-import React from "react";
+
 import { usePlacesWidget } from "react-google-autocomplete";
 import { useDispatch } from "react-redux";
 import {  fetchWeatherData } from "../store/slices/weatherSlice";
+import { fetchWeatherAPI } from "../api/fetchWeather";
 
 
 
 
 export default function AutoComplete() {
-  const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP;
+  const googleMapAPI = process.env.NEXT_PUBLIC_GOOGLE_MAP_API;
   const dispatch = useDispatch();
 
   const { ref } = usePlacesWidget({
@@ -25,7 +26,9 @@ export default function AutoComplete() {
       const state = place?.address_components?.[2]?.short_name;
       const data = city.toLowerCase() + "," + state.toLowerCase();
 
-      dispatch(fetchWeatherData(data));
+      const apiData = fetchWeatherAPI(data)
+
+      // dispatch(fetchWeatherData(data));
       if (ref.current) {
         ref.current.value = "";
       }
