@@ -16,6 +16,8 @@ export default function Home() {
   const state = useSelector((state) => state.weather.state);
   const weatherData = useSelector((state) => state.weather.weather);
 
+
+  
   return (
     <div className={classNames(styles.page, quicksand.className)}>
       <div className={styles.searchContainer}>
