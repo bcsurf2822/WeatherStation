@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function GET() {
-  const googleMapAPI = process.env.GOOGLE_MAP_API; // Get the API key from environment variables
+  const googleMapAPI = process.env.GOOGLE_MAP_API;
 
   if (!googleMapAPI) {
     return NextResponse.json({ error: "API key is not accessible" }, { status: 500 });
