@@ -28,7 +28,7 @@ Project [Demo](https://weather-station-one.vercel.app/ "Weather Station").
 
 ## Visuals
 
-![Screenshot of WeatherStation](/weatherStation.png)
+![Screenshot of WeatherStation](public\weatherStation.png)
 
 ## Running the Project
 
