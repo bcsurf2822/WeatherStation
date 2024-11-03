@@ -3,27 +3,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchWeatherData = createAsyncThunk(
   "weather/fetchWeatherData",
-  async (search) => {
+  async ({ lat, lon }) => {
     try {
       const response = await axios.get(`/api/weather`, {
-        params: { search },
+        params: { lat, lon },
       });
 
       const weatherData = response.data;
+      console.log(weatherData);
 
       return {
-        state: weatherData.state,
-        city: weatherData.city,
         weather: weatherData.weather,
       };
     } catch (error) {
-      console.error("Error in fetchWeatherData thunk:", error);
-      throw new Error('Failed to fetch weather data');
+      console.error("Error in fetchWeatherData:", error);
+      throw new Error("Failed to fetch weather data");
     }
   }
 );
-
-
 
 export const weatherSlice = createSlice({
   name: "weather",
@@ -35,6 +32,12 @@ export const weatherSlice = createSlice({
     error: null,
   },
   reducers: {
+    setCity: (state, action) => {
+      state.city.push(action.payload);
+    },
+    setState: (state, action) => {
+      state.state.push(action.payload);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -44,8 +47,6 @@ export const weatherSlice = createSlice({
       .addCase(fetchWeatherData.fulfilled, (state, action) => {
         state.status = "succeeded";
         state.weather.push(action.payload.weather);
-        state.city.push(action.payload.city);
-        state.state.push(action.payload.state);
       })
       .addCase(fetchWeatherData.rejected, (state, action) => {
         state.status = "failed";
@@ -54,5 +55,5 @@ export const weatherSlice = createSlice({
   },
 });
 
-export const { setLocation } = weatherSlice.actions;
+export const { setState, setCity } = weatherSlice.actions;
 export default weatherSlice.reducer;

@@ -1,5 +1,6 @@
 import { IconSunHigh, IconTemperaturePlus } from "@tabler/icons-react";
-import AutoComplete from "./Autocomplete";
+
+import GoogleAuto from "./GoogleAuto";
 
 export default function SearchBar() {
   return (
@@ -12,7 +13,7 @@ export default function SearchBar() {
             <IconTemperaturePlus />
           </li>
         </ul>
-        <AutoComplete />
+        <GoogleAuto />
       </div>
     </div>
   );

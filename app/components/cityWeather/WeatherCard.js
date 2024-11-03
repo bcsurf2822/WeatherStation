@@ -13,7 +13,6 @@ export default function WeatherCard({ city, state, weather}) {
       <div className={styles.card}>
         <div className={styles.cardBody}>
           <h3 className={styles.cardTitle}>{city}</h3>
-          {/* <p className={styles.cardState}>{state}</p> */}
           <WeatherDetail
             data={metricData}
             selectedMetric={selectedMetric}
