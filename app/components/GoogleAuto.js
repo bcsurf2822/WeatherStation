@@ -4,6 +4,7 @@ import styles from "./components.module.css";
 import {
   fetchWeatherData,
   setCity,
+  setLocation,
   setState,
 } from "../store/slices/weatherSlice";
 import { useDispatch } from "react-redux";
@@ -38,6 +39,7 @@ export default function CustomAutoComplete() {
     const { lat, lon, city, state } = suggestion;
     dispatch(setCity(city));
     dispatch(setState(state));
+    dispatch(setLocation({city: city, state: state}))
     dispatch(fetchWeatherData({ lat, lon }));
   };
 

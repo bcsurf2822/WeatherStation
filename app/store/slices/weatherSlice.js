@@ -27,6 +27,7 @@ export const weatherSlice = createSlice({
   initialState: {
     state: [],
     city: [],
+    location: [],
     weather: [],
     status: "idle",
     error: null,
@@ -37,6 +38,9 @@ export const weatherSlice = createSlice({
     },
     setState: (state, action) => {
       state.state.push(action.payload);
+    },
+    setLocation: (state, action) => {
+      state.location.push(action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -55,5 +59,5 @@ export const weatherSlice = createSlice({
   },
 });
 
-export const { setState, setCity } = weatherSlice.actions;
+export const { setState, setCity, setLocation } = weatherSlice.actions;
 export default weatherSlice.reducer;
