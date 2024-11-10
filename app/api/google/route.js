@@ -6,6 +6,7 @@ export async function GET(request) {
   const input = searchParams.get("input");
 
   const googleAPI = process.env.GOOGLE_API;
+
   if (!googleAPI) {
     return NextResponse.json({ error: "Key Not Found" }, { status: 500 });
   }
