@@ -16,7 +16,7 @@ export async function GET(request) {
       params: {
         input,
         types: "(cities)",
-        components: "country:us",
+        // components: "country:us",
         key: googleAPI,
       },
     });
