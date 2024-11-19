@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useQuery } from "react-query";
 import axios from "axios";
 import styles from "./components.module.css";
 import {
@@ -9,7 +10,17 @@ import {
 } from "../store/slices/weatherSlice";
 import { useDispatch } from "react-redux";
 
+const fetchAutoComplete =  () => {
+  return axios.get('api/google')
+}
+
+const fetchWeatherQuery = () => {
+  return axios.get('api/weather')
+}
+
 export default function CustomAutoComplete() {
+
+
   const dispatch = useDispatch();
   const [inputValue, setInputValue] = useState("");
   const [suggestions, setSuggestions] = useState([]);
